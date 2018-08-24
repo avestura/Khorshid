@@ -1,0 +1,134 @@
+﻿<Window
+    x:Class="Khorshid.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:local="clr-namespace:Khorshid"
+    xmlns:mk="clr-namespace:Khorshid.MarkupExtensions"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="آژانس بانوان خورشید"
+    Width="1200"
+    Height="600"
+    FlowDirection="RightToLeft"
+    FontFamily="{StaticResource Fonts.IRANSans}"
+    Loaded="Window_Loaded"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    mc:Ignorable="d">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel
+                Grid.Row="0"
+                Margin="15"
+                DockPanel.Dock="Left">
+                <TextBlock FontSize="20"><Run Text="خورشید" /></TextBlock>
+                <TextBlock FontSize="12" Foreground="Gray"><Run Text="به نرم افزار جامع مدیریت آژانس خورشید خوش آمدید" /></TextBlock>
+            </StackPanel>
+            <StackPanel
+                Grid.Column="1"
+                Margin="20,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center">
+                <Menu VerticalAlignment="Center" FlowDirection="LeftToRight">
+                    <MenuItem FontSize="15">
+                        <MenuItem.Header>
+
+                            <StackPanel Margin="5,0" Orientation="Horizontal">
+                                <TextBlock>کاربر</TextBlock>
+                                <fa:ImageAwesome
+                                    Height="20"
+                                    Margin="5,0,0,0"
+                                    Foreground="White"
+                                    Icon="UserCircleOutline" />
+                                
+
+                            </StackPanel>
+                        </MenuItem.Header>
+                        <MenuItem StaysOpenOnClick="True" FlowDirection="RightToLeft">
+                            <MenuItem.Template>
+                                <ControlTemplate>
+                                    <Grid Height="60">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <fa:ImageAwesome
+                                            Grid.Column="0"
+                                            Height="40"
+                                            Foreground="#FFCBCBCB"
+                                            Icon="UserCircle" />
+                                        <StackPanel
+                                            Grid.Column="1"
+                                            Margin="5"
+                                            VerticalAlignment="Center">
+                                            <TextBlock FontSize="12" FontWeight="Bold">فروزان بی غم</TextBlock>
+                                            <TextBlock FontSize="10">مدیر آژانس</TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                </ControlTemplate>
+                            </MenuItem.Template>
+                        </MenuItem>
+                        <MenuItem
+                            FontSize="12"
+                            Header="ورود"
+                            FlowDirection="RightToLeft"
+                            Icon="{mk:Image {StaticResource Images.Drawing.VsImage.Home}}" />
+                        <MenuItem
+                            FontSize="12"
+                            Header="پروفایل"
+                            FlowDirection="RightToLeft"
+                            Icon="{mk:Image {StaticResource Images.Drawing.VsImage.User}}"
+                            IsEnabled="False" />
+                        <Separator />
+                        <MenuItem
+                            FontSize="12"
+                            Header="خروج"
+                            Click="Exit_MenuItem_Click"
+                            FlowDirection="RightToLeft"
+                            Icon="{mk:Image {StaticResource Images.Drawing.VsImage.Exit}}"/>
+                    </MenuItem>
+                    <MenuItem FontSize="15" Click="Home_MenuItem_Click">
+                        <MenuItem.Header>
+
+                            <StackPanel Margin="5,0" Orientation="Horizontal">
+                                <TextBlock>بازگشت به خانه</TextBlock>
+                                <fa:ImageAwesome
+                                    Width="20"
+                                    Margin="5,0,0,0"
+                                    Foreground="White"
+                                    Icon="Home" />
+
+
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem >
+                </Menu>
+            </StackPanel>
+        </Grid>
+        <Border
+            Grid.Row="0"
+            BorderBrush="#FFBFBFBF"
+            BorderThickness="0,0,0,1" />
+        <Frame
+            x:Name="MainFrame"
+            Grid.Row="1"
+            Navigated="MainFrame_Navigated"
+            Background="#F8F8F8"
+            JournalOwnership="OwnsJournal"
+            NavigationUIVisibility="Hidden"
+            Source="Views/Pages/MainPage.xaml" />
+    </Grid>
+</Window>

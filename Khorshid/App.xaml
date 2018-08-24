@@ -1,0 +1,51 @@
+﻿<Application
+    x:Class="Khorshid.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Khorshid"
+    LoadCompleted="Application_LoadCompleted"
+    StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <!--#region Colors-->
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Assets/Colors/SolidColors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Assets/Colors/GradientColors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Assets/Colors/Brushes/SolidColorBrushes.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Assets/Colors/Brushes/GradientColorBrushes.xaml" />
+                <!--#endregion-->
+
+                <!--#region Fonts-->
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Assets/Fonts/Fonts.xaml" />
+                <!--#endregion-->
+
+                <!--#region Images-->
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Assets/Images/MenuIcons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Assets/Images/DrawingImages.xaml" />
+
+                <!--#endregion-->
+
+                <!--#region Strings-->
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Assets/Strings/ApplicationStrings.xaml" />
+                <!--#endregion-->
+
+                <!--#region Styles-->
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Views/Styles/GeneralStyles.xaml" />
+                <!--#endregion-->
+
+                <!--#region Templates-->
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Views/Templates/GeneralTemplates.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Views/Templates/CardButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Views/Templates/WhiteMenu.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Views/Templates/BlueMenuTemplate.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Khorshid;component/Views/Templates/BlueMenuItemTemplate.xaml" />
+
+
+
+                <!--#endregion-->
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

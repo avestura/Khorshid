@@ -1,0 +1,54 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Khorshid.Views.Pages"
+    xmlns:c="clr-namespace:Khorshid.Views.Controls"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Class="Khorshid.Views.Pages.MainPage"
+      mc:Ignorable="d" FlowDirection="RightToLeft"
+      FontFamily="{StaticResource Fonts.IRANSans}"
+      d:DesignHeight="600" d:DesignWidth="1200"
+      Title="MainPage">
+    <Grid>
+    
+
+        <Grid Background="#F8F8F8">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <i:Interaction.Behaviors>
+                    <ei:FluidMoveBehavior AppliesTo="Children" Duration="0:0:0.5">
+                        <ei:FluidMoveBehavior.EaseY>
+                            <QuadraticEase EasingMode="EaseInOut" />
+                        </ei:FluidMoveBehavior.EaseY>
+                        <ei:FluidMoveBehavior.EaseX>
+                            <QuadraticEase EasingMode="EaseInOut" />
+                        </ei:FluidMoveBehavior.EaseX>
+                    </ei:FluidMoveBehavior>
+                </i:Interaction.Behaviors>
+                <WrapPanel Margin="20" Orientation="Horizontal">
+                    <c:SectionCard CardImage="{StaticResource Images.Drawing.Undraw.Map}"
+                                   Title="مکان ها"
+                                   ButtonBase.Click="Areas_SectionCard_Click"
+                                   Description="مشاهده و مدیریت قیمت های نواحی تحت پوشش آژانس"/>
+                    
+                    <c:SectionCard CardImage="{StaticResource Images.Drawing.Undraw.CityDriver}"
+                                   Title="رانندگان"
+                                   Margin="10 0 0 0"
+                                   Description="مدیریت رانندگان آژانس"/>
+
+                    <c:SectionCard CardImage="{StaticResource Images.Drawing.Undraw.Bibliophile}"
+                                   Title="دفتر کارکرد"
+                                   Margin="10 0 0 0"
+                                   Description="نمایش میزان کارکرد رانندگان"/>
+
+                    <c:SectionCard CardImage="{StaticResource Images.Drawing.Undraw.BackToSchool}"
+                                   Title="سرویس مدرسه"
+                                   Margin="10 0 0 0"
+                                   Description="مشاهده و مدیریت سرویس های مدرسه"/>
+
+
+                </WrapPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>
