@@ -11,18 +11,18 @@ namespace Khorshid.Extensions
 {
     public static class Extensions
     {
-        public static TownPriceViewModel AsViewModel(this TownData town)
-         => new TownPriceViewModel()
+        public static TownData ApplyModifications(this TownData town)
+         => new TownData()
             {
-                TownId = town.TownId,
+                Id = town.Id,
                 Town = town.Town,
                 Price = town.Price + " تومان",
                 Tag = town.Tag
             };
 
-        public static IEnumerable<TownPriceViewModel> AsViewModelIEnumerable(this IEnumerable<TownData> towns)
+        public static IEnumerable<TownData> AsViewModelIEnumerable(this IEnumerable<TownData> towns)
         {
-            foreach (var town in towns) yield return town.AsViewModel();
+            foreach (var town in towns) yield return town.ApplyModifications();
         }
 
     }

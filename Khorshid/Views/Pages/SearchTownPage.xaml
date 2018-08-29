@@ -13,8 +13,8 @@
       FontFamily="{StaticResource Fonts.IRANSans}"
       d:DesignHeight="600" d:DesignWidth="1200"
       Title="SearchTownPage">
-    <Grid Margin="20">
-        <Grid>
+    <Grid >
+        <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="50" />
@@ -22,7 +22,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Background="#F8F8F8">
-   
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition />
@@ -47,6 +47,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Background="#FFE8CDC0"
+                        Padding="0"
                         BorderBrush="#FFAD4D1F"
                         BorderThickness="0,0,0,5"
                         Click="DeleteItem_Button_Click">
@@ -102,6 +103,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Background="#FFE5E8C0"
+                        Padding="0"
                         BorderBrush="#FF93AD1F"
                         BorderThickness="0,0,0,5"
                         Click="EditItem_Button_Click">
@@ -126,6 +128,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Background="#FFC2E8C0"
+                        Padding="0"
                         BorderBrush="#FF1FAD3F"
                         BorderThickness="0,0,0,5"
                         Click="AddItem_Button_Click">
@@ -184,6 +187,10 @@
                 VerticalGridLinesBrush="#FF9C9C9C">
                 <DataGrid.Columns>
                     <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
+                        Header="شناسه" />
+                    <DataGridTextColumn
                         Width="*"
                         Binding="{Binding Town, UpdateSourceTrigger=PropertyChanged}"
                         Header="نام شهر یا روستا" />
@@ -218,6 +225,7 @@
                     <TextBlock
                         Grid.Row="0"
                         Padding="20"
+                        x:Name="PopupTitle"
                         VerticalAlignment="Center"
                         Background="#FFD9D9D9"
                         FontSize="20">

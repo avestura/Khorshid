@@ -4,6 +4,7 @@ using Khorshid.Models;
 using Khorshid.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,21 +15,36 @@ namespace Khorshid.DataAccessLayer
     public static class KhorshidDataManager
     {
 
-        public static List<TownPriceViewModel> GetTownPriceViewModels()
+        public static List<TownData> GetModifiedTownData()
         {
-            return App.CurrentApp.Configuration.TownData.Select(town => new TownPriceViewModel()
+            var context = new KhorshidContext();
+            return context.TownData.ToArray().Select(town => new TownData()
             {
-                TownId = town.TownId,
+                Id = town.Id,
                 Town = town.Town,
                 Price = town.Price + " تومان",
                 Tag = town.Tag
             }).ToList();
         }
 
-        public static void ResetToDefaultValues()
+        public static void InitilizeDefaultValues()
         {
             var context = new KhorshidContext();
 
+            if(context.TownData.ToList().Count == 0)
+            {
+                AddDefaultTownData(context);
+            }
+
+            if(context.Drivers.ToList().Count == 0)
+            {
+                AddDefaultDriver(context);
+            }
+
+        }
+
+        private static void AddDefaultTownData(KhorshidContext context)
+        {
             var data = new List<TownData>
             {
                 new TownData(){ Town = "آبکنار انزلی", Price = "50000" , Tag = "آب کنار اب آب کنار انزلی"},
@@ -414,7 +430,17 @@ namespace Khorshid.DataAccessLayer
             context.TownData.AddRange(data);
 
             context.SaveChanges();
+        }
 
+        private static void AddDefaultDriver(KhorshidContext context)
+        {
+            context.Drivers.Add(new Driver
+            {
+                Name = "فروزان بی غم",
+                Description = "مدیر آژانس"
+            });
+
+            context.SaveChanges();
         }
 
     }

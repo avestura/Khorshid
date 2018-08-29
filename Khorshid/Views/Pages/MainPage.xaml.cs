@@ -29,5 +29,15 @@ namespace Khorshid.Views.Pages
         {
             App.Navigator.Navigate(new SearchTownPage());
         }
+
+        private void Drivers_SectionCard_Click(object sender, RoutedEventArgs e)
+        {
+            App.Navigator.Navigate(new DriversManagement());
+        }
+
+        private void SectionCard_Click(object sender, RoutedEventArgs e)
+        {
+            App.Navigator.Navigate(new Customers());
+        }
     }
 }

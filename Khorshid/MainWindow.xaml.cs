@@ -23,6 +23,7 @@ using System.Data.Entity.Infrastructure;
 using Khorshid.Views.Animations;
 using Khorshid.Engines;
 using Khorshid.Views.Pages;
+using Khorshid.Data;
 
 namespace Khorshid
 {
@@ -44,11 +45,12 @@ namespace Khorshid
 
             if (App.CurrentApp.Configuration.IsFirstTime)
             {
-                KhorshidDataManager.ResetToDefaultValues();
 
                 App.CurrentApp.Configuration.IsFirstTime = false;
                 App.CurrentApp.Configuration.SaveSettingsToFile();
             }
+
+            KhorshidDataManager.InitilizeDefaultValues();
 
         }
 

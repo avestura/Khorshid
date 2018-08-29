@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Khorshid.Configurations;
+using Khorshid.Data;
 
 namespace Khorshid
 {
@@ -30,6 +32,18 @@ namespace Khorshid
         private void Application_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
 
+        }
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            AppDomain.CurrentDomain.SetData("DataDirectory", AppDomain.CurrentDomain.BaseDirectory);
+            using (var context = new KhorshidContext())
+            {
+                context.Database.Initialize(false);
+            }
+
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("fa-IR");
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("fa-IR");
         }
     }
 }

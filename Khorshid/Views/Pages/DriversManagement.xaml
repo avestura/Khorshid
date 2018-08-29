@@ -3,15 +3,48 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:c="clr-namespace:Khorshid.Views.Controls"
       xmlns:local="clr-namespace:Khorshid.Views.Pages"
+      x:Name="_this"
+      xmlns:model="clr-namespace:Khorshid.Models"
+      Loaded="Page_Loaded"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
       mc:Ignorable="d" Background="#f8f8f8"
+      FlowDirection="RightToLeft" FontFamily="{StaticResource Fonts.IRANSans}"
       d:DesignHeight="600" d:DesignWidth="1200"
       Title="DriversManagement">
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock Foreground="#606060" FontWeight="Bold" FontSize="20">مدیریت رانندگان</TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Margin="0 10">
+            <StackPanel Orientation="Horizontal">
+                <Button Click="AddDriver_Button_Click">ایجاد راننده جدید</Button>
+
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="DriverItems">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" Margin="20" Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <c:SectionCard Tag="{Binding Id}" Click="SectionCard_Click" Margin="0 0 10 10" Title="{Binding Name}" Description="{Binding Description}" CardImage="{StaticResource Images.Drawing.Undraw.CityDriver}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page>

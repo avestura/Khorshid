@@ -52,5 +52,11 @@ namespace Khorshid.Views.Controls
         public static readonly DependencyProperty CardImageProperty =
             DependencyProperty.Register("CardImage", typeof(ImageSource), typeof(SectionCard));
 
+        public event EventHandler<RoutedEventArgs> Click;
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Click?.Invoke(this, e);
+        }
     }
 }

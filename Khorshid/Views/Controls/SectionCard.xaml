@@ -13,7 +13,7 @@
                 <DropShadowEffect RenderingBias="Quality" Color="Gainsboro" BlurRadius="10"/>
             </Border.Effect>
         </Border>
-        <Button VerticalContentAlignment="Stretch"  Style="{DynamicResource Khorshid.Controls.SectionCard.ButtonTemplate}">
+        <Button Click="Button_Click" VerticalContentAlignment="Stretch"  Style="{DynamicResource Khorshid.Controls.SectionCard.ButtonTemplate}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -28,7 +28,7 @@
                 </StackPanel>
             </Grid>
         </Button>
-        
+
     </Grid>
 
 </UserControl>

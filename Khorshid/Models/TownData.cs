@@ -12,7 +12,7 @@ namespace Khorshid.Models
     {
 
         [Key]
-        public int TownId { get; set; }
+        public int Id { get; set; }
 
         public string Town { get; set; }
 

@@ -1,0 +1,129 @@
+﻿<Page
+    x:Class="Khorshid.Views.Pages.EditDriverPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Khorshid.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="EditDriverPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Background="#f8f8f8"
+    FlowDirection="RightToLeft"
+    FontFamily="{StaticResource Fonts.IRANSans}"
+    mc:Ignorable="d">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock
+                Margin="0,10"
+                FontSize="20"
+                FontWeight="Bold"
+                Foreground="#FF606060">
+                ویرایش راننده:
+                <TextBlock Foreground="Green" Text="{Binding DriverName}" />
+            </TextBlock>
+            <TextBlock
+                Margin="0,0,0,10"
+                FontSize="18"
+                FontWeight="Light"
+                Foreground="#FF606060">
+                با استفاده از فرم زیر میتوانید یک راننده به مجموعه اضافه کنید
+            </TextBlock>
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                FontSize="15">
+                نام جدید راننده:
+            </TextBlock>
+            <TextBox
+                x:Name="DriverName_Textbox"
+                Grid.Row="0"
+                Margin="0,0,0,10"
+                Padding="5"
+                FontSize="15"
+                Text="{Binding DriverName, Mode=OneTime}" />
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                FontSize="15">
+                توضیحات جدید راننده:
+            </TextBlock>
+            <TextBox
+                x:Name="Description_Textbox"
+                Grid.Row="0"
+                Padding="5"
+                FontSize="15"
+                Text="{Binding DriverDescription, Mode=OneTime}" />
+
+            <Border
+                Margin="0,20"
+                BorderBrush="Gray"
+                BorderThickness="0,0,0,1" />
+
+            <DockPanel>
+                <StackPanel
+                    HorizontalAlignment="Right"
+                    DockPanel.Dock="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        Margin="5,0"
+                        Padding="20,5"
+                        Click="CancelButton_Click">
+                        بیخیال
+                    </Button>
+                    <Button
+                        Padding="20,5"
+                        Background="LightBlue"
+                        Click="EditDriverButton_Click"
+                        Foreground="#FF0B5BA9">
+                        ویرایش راننده
+                    </Button>
+                </StackPanel>
+                <Button
+                    x:Name="DeleteDriver_Button"
+                    Padding="20,5"
+                    HorizontalAlignment="Left"
+                    Background="#FFFFCBD3"
+                    Click="DeleteDriver_Button_Click"
+                    DockPanel.Dock="Left"
+                    Foreground="#821d1a">
+                    حذف راننده از مجموعه
+                </Button>
+                <Popup
+                    x:Name="Delete_Popup"
+                    IsOpen="False"
+                    PlacementTarget="{Binding ElementName=DeleteDriver_Button}"
+                    StaysOpen="True"
+                    TextBlock.FontSize="15">
+                    <Border
+                        Padding="20,10"
+                        Background="#FFD7D7D7"
+                        BorderBrush="Gray"
+                        BorderThickness="2">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center">آیا از حذف اطمینان دارید؟</TextBlock>
+                            <Button
+                                x:Name="Delete_confirm_No"
+                                Margin="10"
+                                Padding="20,5"
+                                Click="DeleteConfirm_No_Click">
+                                خیر
+                            </Button>
+                            <Button
+                                x:Name="DeleteConfirm_Yes"
+                                Margin="10"
+                                Padding="20,5"
+                                Click="DeleteConfirm_Yes_Click">
+                                بله
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+
+            </DockPanel>
+        </StackPanel>
+    </Grid>
+</Page>

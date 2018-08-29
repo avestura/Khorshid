@@ -1,0 +1,62 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Khorshid.Views.Templates">
+    <Style x:Key="Khorshid.Controls.NormalButton.FocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <SolidColorBrush x:Key="Khorshid.Controls.NormalButton.Static.Background" Color="#F4F4F4"/>
+    <SolidColorBrush x:Key="Khorshid.Controls.NormalButton.Static.Border" Color="#FF707070"/>
+    <SolidColorBrush x:Key="Khorshid.Controls.NormalButton.MouseOver.Background" Color="#EAEAEA"/>
+    <SolidColorBrush x:Key="Khorshid.Controls.NormalButton.MouseOver.Border" Color="#FF3C7FB1"/>
+    <SolidColorBrush x:Key="Khorshid.Controls.NormalButton.Pressed.Background" Color="#FFC4E5F6"/>
+    <SolidColorBrush x:Key="Khorshid.Controls.NormalButton.Pressed.Border" Color="#FF2C628B"/>
+    <SolidColorBrush x:Key="Khorshid.Controls.NormalButton.Disabled.Background" Color="#FFF4F4F4"/>
+    <SolidColorBrush x:Key="Khorshid.Controls.NormalButton.Disabled.Border" Color="#FFADB2B5"/>
+    <SolidColorBrush x:Key="Khorshid.Controls.NormalButton.Disabled.Foreground" Color="#FF838383"/>
+    <SolidColorBrush x:Key="Khorshid.Controls.NormalButton.Foreground" Color="#333333" />
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource Khorshid.Controls.NormalButton.FocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource Khorshid.Controls.NormalButton.Static.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Khorshid.Controls.NormalButton.Static.Border}"/>
+        <Setter Property="Foreground" Value="{StaticResource Khorshid.Controls.NormalButton.Foreground}"/>
+        <Setter Property="BorderThickness" Value="0 0 0 2"/>
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Khorshid.Controls.NormalButton.MouseOver.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Khorshid.Controls.NormalButton.MouseOver.Border}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Khorshid.Controls.NormalButton.Pressed.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Khorshid.Controls.NormalButton.Pressed.Border}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Khorshid.Controls.NormalButton.Disabled.Background}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Khorshid.Controls.NormalButton.Disabled.Border}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Khorshid.Controls.NormalButton.Disabled.Foreground}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

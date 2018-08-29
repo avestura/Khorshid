@@ -1,0 +1,448 @@
+﻿<Page
+    x:Class="Khorshid.Views.Pages.DriverPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:local="clr-namespace:Khorshid.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tk="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:vm="clr-namespace:Khorshid.ViewModels"
+    Title="DriverPage"
+    d:DesignHeight="600"
+    d:DesignWidth="1200"
+    Background="#f8f8f8"
+    FlowDirection="RightToLeft"
+    FontFamily="{StaticResource Fonts.IRANSans}"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="#F8F8F8">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                    Grid.Column="0"
+                    Margin="20,10"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal"
+                    TextBlock.FontSize="20"
+                    TextBlock.FontWeight="Bold"
+                    TextBlock.Foreground="#606060">
+                    <TextBlock VerticalAlignment="Center" Text="راننده" />
+                    <TextBlock
+                        Margin="10"
+                        VerticalAlignment="Center"
+                        Text="{Binding DriverName}" />
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Foreground="#ff88cc">
+                        <Hyperlink Click="Hyperlink_Click" TextDecorations="{x:Null}">(ویرایش راننده)</Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="20"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <Button
+                        x:Name="DeleteItem_Button"
+                        Padding="0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Background="#FFE8CDC0"
+                        BorderBrush="#FFAD4D1F"
+                        BorderThickness="0,0,0,5"
+                        Click="DeleteItem_Button_Click">
+                        <Grid>
+
+                            <StackPanel Orientation="Horizontal">
+                                <fa:ImageAwesome
+                                    Width="15"
+                                    Margin="5,10"
+                                    Foreground="#FFAD4D1F"
+                                    Icon="Trash" />
+                                <TextBlock
+                                    Margin="5,0,10,0"
+                                    VerticalAlignment="Center"
+                                    FontSize="15"
+                                    Foreground="#FF803300">
+                                    حذف کارکرد
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Button>
+                    <Popup
+                        x:Name="Delete_Popup"
+                        IsOpen="False"
+                        PlacementTarget="{Binding ElementName=DeleteItem_Button}"
+                        StaysOpen="True"
+                        TextBlock.FontSize="20">
+                        <Border
+                            Padding="20,10"
+                            Background="#FFD7D7D7"
+                            BorderBrush="Gray"
+                            BorderThickness="2">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center">آیا از حذف اطمینان دارید؟</TextBlock>
+                                <Button
+                                    x:Name="Delete_confirm_No"
+                                    Margin="10"
+                                    Padding="20,0"
+                                    Click="DeleteConfirm_No_Click">
+                                    خیر
+                                </Button>
+                                <Button
+                                    x:Name="DeleteConfirm_Yes"
+                                    Margin="10"
+                                    Padding="20,0"
+                                    Click="DeleteConfirm_Yes_Click">
+                                    بله
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                    <Button
+                        x:Name="EditItem_Button"
+                        Margin="10,0,0,0"
+                        Padding="0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Background="#FFE5E8C0"
+                        BorderBrush="#FF93AD1F"
+                        BorderThickness="0,0,0,5"
+                        Click="EditItem_Button_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome
+                                Width="15"
+                                Margin="5,10"
+                                Foreground="#FFA7AD1F"
+                                Icon="Pencil" />
+                            <TextBlock
+                                Margin="5,0,10,0"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Foreground="#FF718000">
+                                تصحیح کارکرد
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button
+                        x:Name="AddItem_Button"
+                        Margin="10,0,0,0"
+                        Padding="0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Background="#FFC2E8C0"
+                        BorderBrush="#FF1FAD3F"
+                        BorderThickness="0,0,0,5"
+                        Click="AddItem_Button_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome
+                                Width="15"
+                                Margin="5,10"
+                                Foreground="#FF1FAD3F"
+                                Icon="PlusCircle" />
+                            <TextBlock
+                                Margin="5,0,10,0"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Foreground="Green">
+                                افزودن کارکرد جدید
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <StackPanel
+                    Margin="10,0,10,10"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    TextBlock.FontSize="15">
+                    <TextBlock VerticalAlignment="Center">مجموع کل کارکرد این راننده:</TextBlock>
+                    <TextBlock
+                        Margin="5,0"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Foreground="Green"
+                        Text="{Binding DriverTotalPrice}" />
+                    <TextBlock VerticalAlignment="Center">تومان</TextBlock>
+                    <TextBlock Margin="5,0"><Bold>/</Bold></TextBlock>
+                    <TextBlock>درصد کمیسیون تسویه فعلی:</TextBlock>
+                    <TextBlock
+                        Margin="5,0"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Foreground="Green"
+                        Text="{Binding WorkPagePrecentage}" />
+                    <TextBlock Margin="5,0"><Bold>/</Bold></TextBlock>
+                    <TextBlock>کمیسیون:</TextBlock>
+                    <TextBlock
+                        Margin="5,0"
+                        VerticalAlignment="Center"
+                        FontWeight="Bold"
+                        Foreground="Green"
+                        Text="{Binding WorkPageCommission}" />
+                </StackPanel>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Foreground="#FFA00D0D"
+                        Visibility="{Binding ClosedPageVisibility}">
+                        (این دفتر قبلا تسفیه شده است
+                        <Hyperlink Click="GoToLastPage_Hyperlink_Click" TextDecorations="{x:Null}">برو به آخرین صفحه</Hyperlink>
+                        )
+                    </TextBlock>
+                    <Button
+                        x:Name="ClosePagePopupButton"
+                        FontSize="15"
+Click="ClosePagePopupButton_Click"
+                        Visibility="{Binding CloseButtonVisibility}">
+                        تسفیه دفتر حساب فعلی
+                    </Button>
+                    <Popup x:Name="ClosePagePopup" IsOpen="False" StaysOpen="False" PlacementTarget="{Binding ClosePageButton}">
+                        <Border
+                            Padding="20,10"
+                            Background="#FFD7D7D7"
+                            BorderBrush="Gray"
+                            BorderThickness="2">
+                            <StackPanel>
+                                <TextBlock VerticalAlignment="Center">آیا از تسویه حساب این صفحه مطمئن اید؟ .</TextBlock>
+                                <TextBlock>توجه کنید که این عمل برگشت پذیر نیست</TextBlock>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontSize="15">درصد کمیسیون:</TextBlock>
+                                    <TextBox x:Name="CommisionPrecentage_Textbox" Margin="10 0" Width="100" FontSize="15" TextAlignment="Center">18</TextBox>
+                                    <TextBlock FontWeight="Bold" FontSize="15">%</TextBlock>
+                                </StackPanel>
+
+                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                    <Button
+                                        Margin="10"
+                                        Padding="20,5"
+                                        Click="ClosePage_Cancel_Button_Click">
+                                        بیخیال
+                                    </Button>
+                                    <Button
+                                        Margin="0,10"
+                                        Padding="20,5"
+                                        Background="#FFC2E8C0"
+                                        BorderBrush="#FF1FAD3F"
+                                        Click="ClosePageButton_Click"
+                                        Foreground="Green">
+                                        تسویه حساب
+                                    </Button>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Popup>
+                    <Button Margin="10,0,0,0" Click="PreviousWorkPage_Button_Click">
+                        <fa:ImageAwesome Height="16" Icon="ChevronRight" />
+                    </Button>
+                    <TextBox
+                        Width="100"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FontSize="15"
+                        IsReadOnly="True"
+                        Text="{Binding CurrentPageNoString, Mode=OneWay}"
+                        TextAlignment="Center" />
+                    <Button Click="NextWorkPage_Button_Click">
+                        <fa:ImageAwesome Height="16" Icon="ChevronLeft" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <DataGrid
+                x:Name="DataGrid_Main"
+                Grid.Row="2"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                Focusable="True"
+                HorizontalGridLinesBrush="#FFA6A6A6"
+                IsReadOnly="True"
+                ItemsSource="{Binding DriverWorks}"
+                SelectionMode="Single"
+                TextBlock.FontSize="20"
+                VerticalGridLinesBrush="#FF9C9C9C"
+                VirtualizingPanel.IsVirtualizing="True"
+                VirtualizingPanel.VirtualizationMode="Recycling">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="auto"
+                        Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
+                        Header="شناسه" />
+                    <DataGridTextColumn
+                        Width="auto"
+                        MinWidth="120"
+                        Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged, StringFormat=d, ConverterCulture=fa-IR}"
+                        Header="تاریخ" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding FromLocation, UpdateSourceTrigger=PropertyChanged}"
+                        Header="مبدا" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding ToLocation, UpdateSourceTrigger=PropertyChanged}"
+                        Header="مقصد" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}"
+                        Header="قیمت" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid
+            x:Name="UI_Overlay"
+            Background="#AA6F6F6F"
+            Visibility="Collapsed">
+            <Border
+                Width="600"
+                Height="300"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="#FFE0E0E0"
+                BorderBrush="Gray"
+                BorderThickness="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        x:Name="PopupTitle"
+                        Grid.Row="0"
+                        Padding="20"
+                        VerticalAlignment="Center"
+                        Background="#FFD9D9D9"
+                        FontSize="20">
+                        عنوان صفحه
+                    </TextBlock>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="10,0"
+                            VerticalAlignment="Center"
+                            FontSize="20">
+                            مبدا:
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="10,0"
+                            VerticalAlignment="Center"
+                            FontSize="20">
+                            مقصد:
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="10,0"
+                            VerticalAlignment="Center"
+                            FontSize="20">
+                            قیمت:
+                        </TextBlock>
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="10,0"
+                            VerticalAlignment="Center"
+                            FontSize="20">
+                            تاریخ:
+                        </TextBlock>
+
+                        <ComboBox
+                            x:Name="FromLocation_ComboBox"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="10"
+                            VerticalContentAlignment="Center"
+                            DisplayMemberPath="Town"
+                            FontSize="15"
+                            IsEditable="True"
+                            ItemsSource="{Binding Locations}" />
+                        <ComboBox
+                            x:Name="ToLocation_ComboBox"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10"
+                            VerticalContentAlignment="Center"
+                            DisplayMemberPath="Town"
+                            FontSize="15"
+                            IsEditable="True"
+                            ItemsSource="{Binding Locations}"
+                            SelectionChanged="ToLocation_ComboBox_SelectionChanged" />
+                        <TextBox
+                            x:Name="Price_Textbox"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="10"
+                            VerticalContentAlignment="Center"
+                            FontSize="15" />
+
+                        <tk:DatePicker
+                            x:Name="DatePicker"
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="10"
+                            Background="White"
+                            BorderBrush="#FFACACAC"
+                            BorderThickness="1"
+                            FontSize="15" />
+
+                        <StackPanel
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            FlowDirection="LeftToRight"
+                            Orientation="Horizontal">
+                            <Button
+                                x:Name="OkButton"
+                                Width="150"
+                                Margin="10"
+                                Click="OkButton_Click"
+                                Content="تایید"
+                                IsDefault="True" />
+                            <Button
+                                x:Name="CancelButton"
+                                Width="150"
+                                Margin="0,10"
+                                Click="CancelButton_Click"
+                                Content="بیخیال"
+                                IsCancel="True" />
+                        </StackPanel>
+
+                    </Grid>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Grid>
+</Page>

@@ -15,6 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -27,7 +28,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -50,6 +50,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>lotus.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -67,14 +70,14 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Core.1.0.108.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    <Reference Include="System.Data.SQLite, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.109.1\lib\net46\System.Data.SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.SQLite.EF6, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.108.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.109.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.108.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.109.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -94,6 +97,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit">
+      <HintPath>..\WPFToolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -109,19 +115,49 @@
     </Compile>
     <Compile Include="DataAccessLayer\KhorshidDataManager.cs" />
     <Compile Include="Data\KhorshidContext.cs" />
-    <Compile Include="Engines\CalculationEngine.cs" />
     <Compile Include="Engines\SearchEngine.cs" />
     <Compile Include="Extensions\Extensions.cs" />
-    <Compile Include="KhorshidDataDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KhorshidDataDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="MarkupExtensions\ImageExtension.cs" />
+    <Compile Include="Migrations\201808241346366_InitialCreate.cs" />
+    <Compile Include="Migrations\201808241346366_InitialCreate.Designer.cs">
+      <DependentUpon>201808241346366_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808251149217_DriverWorks.cs" />
+    <Compile Include="Migrations\201808251149217_DriverWorks.Designer.cs">
+      <DependentUpon>201808251149217_DriverWorks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808260221421_WorkDateField.cs" />
+    <Compile Include="Migrations\201808260221421_WorkDateField.Designer.cs">
+      <DependentUpon>201808260221421_WorkDateField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808260406521_CustomerEntity.cs" />
+    <Compile Include="Migrations\201808260406521_CustomerEntity.Designer.cs">
+      <DependentUpon>201808260406521_CustomerEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808260651097_SubscriptionIdInt.cs" />
+    <Compile Include="Migrations\201808260651097_SubscriptionIdInt.Designer.cs">
+      <DependentUpon>201808260651097_SubscriptionIdInt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808260719334_UniqueIndexSubscriptionId.cs" />
+    <Compile Include="Migrations\201808260719334_UniqueIndexSubscriptionId.Designer.cs">
+      <DependentUpon>201808260719334_UniqueIndexSubscriptionId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808280851537_WorkPag.cs" />
+    <Compile Include="Migrations\201808280851537_WorkPag.Designer.cs">
+      <DependentUpon>201808280851537_WorkPag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808281316344_WorkPageSecondMigration.cs" />
+    <Compile Include="Migrations\201808281316344_WorkPageSecondMigration.Designer.cs">
+      <DependentUpon>201808281316344_WorkPageSecondMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Driver.cs" />
-    <Compile Include="Models\SampleModel.cs" />
+    <Compile Include="Models\DriverWork.cs" />
+    <Compile Include="Models\WorkPage.cs" />
     <Compile Include="Models\TownData.cs" />
-    <Compile Include="ViewModels\TownPriceViewModel.cs" />
+    <Compile Include="ViewModels\DriverDetailsViewModel.cs" />
+    <Compile Include="ViewModels\EditDriverViewModel.cs" />
     <Compile Include="Views\Animations\BlinkAnimations.cs" />
     <Compile Include="Views\Animations\MarginFadeAnimations.cs" />
     <Compile Include="Views\Animations\ShowAndFadeAnimations.cs" />
@@ -132,8 +168,20 @@
     <Compile Include="Views\Controls\WaveCircle\WaveCircle.xaml.cs">
       <DependentUpon>WaveCircle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\AddDriverPage.xaml.cs">
+      <DependentUpon>AddDriverPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Customers.xaml.cs">
+      <DependentUpon>Customers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\DriverPage.xaml.cs">
+      <DependentUpon>DriverPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\DriversManagement.xaml.cs">
       <DependentUpon>DriversManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\EditDriverPage.xaml.cs">
+      <DependentUpon>EditDriverPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -196,7 +244,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\DesignerViewModels\DesignerViewModels.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\AddDriverPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Customers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\DriverPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\DriversManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\EditDriverPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,9 +296,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Templates\DateTimePickerTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Templates\GeneralTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Templates\NormalButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Templates\WhiteMenu.xaml">
       <SubType>Designer</SubType>
@@ -251,6 +327,30 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201808241346366_InitialCreate.resx">
+      <DependentUpon>201808241346366_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808251149217_DriverWorks.resx">
+      <DependentUpon>201808251149217_DriverWorks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808260221421_WorkDateField.resx">
+      <DependentUpon>201808260221421_WorkDateField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808260406521_CustomerEntity.resx">
+      <DependentUpon>201808260406521_CustomerEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808260651097_SubscriptionIdInt.resx">
+      <DependentUpon>201808260651097_SubscriptionIdInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808260719334_UniqueIndexSubscriptionId.resx">
+      <DependentUpon>201808260719334_UniqueIndexSubscriptionId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808280851537_WorkPag.resx">
+      <DependentUpon>201808280851537_WorkPag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808281316344_WorkPageSecondMigration.resx">
+      <DependentUpon>201808281316344_WorkPageSecondMigration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -260,17 +360,6 @@
     <Resource Include="Assets\Fonts\IRANSans_Light.ttf" />
     <Resource Include="Assets\Fonts\IRANSans_Medium.ttf" />
     <Resource Include="Assets\Fonts\IRANSans_UltraLight.ttf" />
-    <None Include="KhorshidDataDataSet.xsc">
-      <DependentUpon>KhorshidDataDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="KhorshidDataDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>KhorshidDataDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="KhorshidDataDataSet.xss">
-      <DependentUpon>KhorshidDataDataSet.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -286,13 +375,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Photos\AryanSoftware_Logo.svg" />
-    <Content Include="KhorshidData.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="KhorshidData.mdf" />
     <Content Include="KhorshidData_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>KhorshidData.mdf</DependentUpon>
     </Content>
+    <Resource Include="lotus.ico" />
     <Resource Include="Assets\WinRT\App Logo 150x150.png" />
     <Resource Include="Assets\WinRT\App Logo 70x70.png" />
     <Resource Include="Khorshid.visualelementsmanifest.xml">
@@ -316,11 +403,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.109.1\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.109.1\build\net46\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.109.1\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.109.1\build\net46\System.Data.SQLite.Core.targets'))" />
   </Target>
 </Project>

@@ -1,4 +1,5 @@
-﻿using Khorshid.DataAccessLayer;
+﻿using Khorshid.Data;
+using Khorshid.DataAccessLayer;
 using Khorshid.Engines;
 using Khorshid.Models;
 using Khorshid.ViewModels;
@@ -29,7 +30,7 @@ namespace Khorshid.Views.Pages
 
         private int CurrentModifyId { get; set; }
 
-        private ObservableCollection<TownPriceViewModel> Context { get; } = new ObservableCollection<TownPriceViewModel>();
+        private ObservableCollection<TownData> Context { get; } = new ObservableCollection<TownData>();
 
         public string TextBoxPreviousText { get; set; } = "";
 
@@ -43,7 +44,9 @@ namespace Khorshid.Views.Pages
             DataGrid_Main.DataContext = Context;
 
             Context.Clear();
-            KhorshidDataManager.GetTownPriceViewModels().ForEach(town => Context.Add(town));
+            KhorshidDataManager.GetModifiedTownData().ForEach(town => Context.Add(town));
+
+            SearchBox.Focus();
         }
 
         private void Page_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -71,11 +74,11 @@ namespace Khorshid.Views.Pages
             if (SearchBox.Text.Trim()?.Length == 0)
             {
                 Context.Clear();
-                KhorshidDataManager.GetTownPriceViewModels().ForEach(town => Context.Add(town));
+                KhorshidDataManager.GetModifiedTownData().ForEach(town => Context.Add(town));
             }
             else
             {
-                string term = SearchBox.Text;
+                string term = SearchBox.Text.Replace("آ", "ا");
 
                 SearchEngine.ApplySearchOnCollection(term, Context);
 
@@ -84,16 +87,19 @@ namespace Khorshid.Views.Pages
 
         private void DataGrid_Main_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
-            var row = e.Row.DataContext as TownPriceViewModel;
-            var data = App.CurrentApp.Configuration.TownData;
+            var row = e.Row.DataContext as TownData;
 
-            var editedItem = data.Find(item => item.TownId == row.TownId);
+            var context = new KhorshidContext();
+
+            var data = context.TownData;
+
+            var editedItem = data.Find(row.Id);
 
             editedItem.Price = row.Price.Replace(" تومان", "").Replace("تومان", "");
             editedItem.Tag = row.Tag;
             editedItem.Town = row.Town;
 
-            App.CurrentApp.Configuration.SaveSettingsToFile();
+            context.SaveChanges();
 
         }
 
@@ -106,30 +112,31 @@ namespace Khorshid.Views.Pages
                 return;
             }
 
+            var context = new KhorshidContext();
+
             if (OkButton.Tag is bool isCreateMode)
             {
                 if (isCreateMode)
                 {
                     var townData = new TownData()
                     {
-                        TownId = CurrentModifyId,
                         Price = Price_Textbox.Text,
                         Town = Town_TextBox.Text,
                         Tag = Tags_Textbox.Text
                     };
 
-                    App.CurrentApp.Configuration.TownData.Add(townData);
-                    App.CurrentApp.Configuration.SaveSettingsToFile();
+                    context.TownData.Add(townData);
+                    context.SaveChanges();
                     SearchTextBox_ApplyModification();
                 }
                 else
                 {
-                    var townData = App.CurrentApp.Configuration.TownData.First(item => item.TownId == CurrentModifyId);
+                    var townData = context.TownData.First(item => item.Id == CurrentModifyId);
                     townData.Town = Town_TextBox.Text;
                     townData.Price = Price_Textbox.Text;
                     townData.Tag = Tags_Textbox.Text;
 
-                    App.CurrentApp.Configuration.SaveSettingsToFile();
+                    context.SaveChanges();
 
                     SearchTextBox_ApplyModification();
                 }
@@ -149,34 +156,36 @@ namespace Khorshid.Views.Pages
 
         private void AddItem_Button_Click(object sender, RoutedEventArgs e)
         {
-            CurrentModifyId = App.CurrentApp.Configuration.TownData.Max(item => item.TownId) + 1;
+            var context = new KhorshidContext();
+
+            CurrentModifyId = context.TownData.Max(item => item.Id) + 1;
             Town_TextBox.Text = "";
             Price_Textbox.Text = "";
             Tags_Textbox.Text = "";
             OkButton.Content = "ساخت جدید";
             OkButton.Tag = true;
-
+            PopupTitle.Text = "ایجاد ناحیه جدید";
             UI_Overlay.ShowUsingLinearAnimation(milliSeconds: 250);
         }
 
         private void EditItem_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (DataGrid_Main.SelectedItem is TownPriceViewModel model)
+            if (DataGrid_Main.SelectedItem is TownData model)
             {
-                CurrentModifyId = model.TownId;
+                CurrentModifyId = model.Id;
                 Town_TextBox.Text = model.Town;
                 Price_Textbox.Text = model.Price.Replace(" تومان", "").Replace("تومان", "");
                 Tags_Textbox.Text = model.Tag;
                 OkButton.Content = "ویرایش";
                 OkButton.Tag = false;
-
+                PopupTitle.Text = "ویرایش ناحیه";
                 UI_Overlay.ShowUsingLinearAnimation(milliSeconds: 250);
             }
         }
 
         private void DeleteItem_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (DataGrid_Main.SelectedItem is TownPriceViewModel model)
+            if (DataGrid_Main.SelectedItem is TownData model)
             {
                 Delete_Popup.IsOpen = true;
             }
@@ -192,13 +201,15 @@ namespace Khorshid.Views.Pages
         private void DeleteConfirm_Yes_Click(object sender, RoutedEventArgs e)
         {
 
-            if (DataGrid_Main.SelectedItem is TownPriceViewModel model)
+            if (DataGrid_Main.SelectedItem is TownData model)
             {
-                var desiredItem = App.CurrentApp.Configuration.TownData.First(item => item.TownId == model.TownId);
+                var context = new KhorshidContext();
 
-                App.CurrentApp.Configuration.TownData.Remove(desiredItem);
+                var desiredItem = context.TownData.First(item => item.Id == model.Id);
 
-                App.CurrentApp.Configuration.SaveSettingsToFile();
+                context.TownData.Remove(desiredItem);
+
+                context.SaveChanges();
             }
 
             Delete_Popup.IsOpen = false;
