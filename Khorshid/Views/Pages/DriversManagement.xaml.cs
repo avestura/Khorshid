@@ -54,4 +54,5 @@ namespace Khorshid.Views.Pages
             App.Navigator.Navigate(new DriverPage(driverId));
         }
     }
+   
 }
