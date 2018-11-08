@@ -3,7 +3,7 @@
         <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="auto" />
+                <RowDefinition MinHeight="60" Height="auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Background="#F8F8F8">
@@ -12,11 +12,11 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Margin="20,10" VerticalAlignment="Center" Orientation="Horizontal" TextBlock.FontSize="20" TextBlock.FontWeight="Bold" TextBlock.Foreground="#606060">
-                    <TextBlock VerticalAlignment="Center" Text="سرویس" />
+                    <TextBlock x:Name="SrvName" VerticalAlignment="Center" Text="سرویس" />
                     <TextBlock Margin="10" VerticalAlignment="Center" Text="{Binding DriverName}" />
                 </StackPanel>
                 <StackPanel Grid.Column="1" Margin="20" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
-                    <Button x:Name="DeleteItem_Button" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FFE8CDC0" BorderBrush="#FFAD4D1F" BorderThickness="0,0,0,5" >
+                    <Button x:Name="DeleteItem_Button" Click="DeleteItem_Button_Click" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FFE8CDC0" BorderBrush="#FFAD4D1F" BorderThickness="0,0,0,5">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
                                 <fa:ImageAwesome Width="15" Margin="5,10" Foreground="#FFAD4D1F" Icon="Trash" />
@@ -26,28 +26,15 @@
                             </StackPanel>
                         </Grid>
                     </Button>
-                    <Popup x:Name="Delete_Popup" IsOpen="False" PlacementTarget="{Binding ElementName=DeleteItem_Button}" StaysOpen="True" TextBlock.FontSize="20">
-                        <Border Padding="20,10" Background="#FFD7D7D7" BorderBrush="Gray" BorderThickness="2">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock VerticalAlignment="Center">آیا از حذف اطمینان دارید؟</TextBlock>
-                                <Button x:Name="Delete_confirm_No" Margin="10" Padding="20,0">
-                                    خیر
-                                </Button>
-                                <Button x:Name="DeleteConfirm_Yes" Margin="10" Padding="20,0">
-                                    بله
-                                </Button>
-                            </StackPanel>
-                        </Border>
-                    </Popup>
                     <Button x:Name="EditItem_Button" Margin="10,0,0,0" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FFE5E8C0" BorderBrush="#FF93AD1F" BorderThickness="0,0,0,5">
                         <StackPanel Orientation="Horizontal">
-                            <fa:ImageAwesome Width="15" Margin="5,10" Foreground="#FFA7AD1F" Icon="Pencil" />
+                            <fa:ImageAwesome Width="15" Margin="5,10" Foreground="#FFA7AD1F" Icon="Money" />
                             <TextBlock Margin="5,0,10,0" VerticalAlignment="Center" FontSize="15" Foreground="#FF718000">
-                                تصحیح سرویس
+                                تصویه حساب
                             </TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="AddItem_Button" Margin="10,0,0,0" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FFC2E8C0" BorderBrush="#FF1FAD3F" BorderThickness="0,0,0,5" Click="AddItem_Button_Click" >
+                    <Button x:Name="AddItem_Button" Margin="10,0,0,0" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FFC2E8C0" BorderBrush="#FF1FAD3F" BorderThickness="0,0,0,5" Click="AddItem_Button_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:ImageAwesome Width="15" Margin="5,10" Foreground="#FF1FAD3F" Icon="PlusCircle" />
                             <TextBlock Margin="5,0,10,0" VerticalAlignment="Center" FontSize="15" Foreground="Green">
@@ -57,13 +44,29 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            <DataGrid x:Name="DataGrid_Main" Grid.Row="2" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Focusable="True" HorizontalGridLinesBrush="#FFA6A6A6" IsReadOnly="True" ItemsSource="{Binding DriverWorks}" SelectionMode="Single" TextBlock.FontSize="20" VerticalGridLinesBrush="#FF9C9C9C" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling">
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Margin="10,5" FontSize="20">
+                    عبارتی را برای جستجو وارد کنید:
+                </TextBlock>
+                <TextBox x:Name="SearchBox"  Grid.Column="1" Margin="0,5,10,5" Background="#FFE8FFF4" BorderBrush="#FF059F3E" Focusable="True" FontSize="20" TextAlignment="Center" TextChanged="SearchBox_TextChanged" />
+            </Grid>
+            <DataGrid x:Name="DataGrid_Main" ItemsSource="{Binding}" Grid.Row="2" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" Focusable="True" HorizontalGridLinesBrush="#FFA6A6A6" IsReadOnly="True" SelectionMode="Extended" TextBlock.FontSize="20" VerticalGridLinesBrush="#FF9C9C9C" VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" Loaded="DataGrid_Main_Loaded">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="auto" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="شناسه" />
-                    <DataGridTextColumn Width="auto" MinWidth="120" Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged, StringFormat=d, ConverterCulture=fa-IR}" Header="تاریخ" />
-                    <DataGridTextColumn Width="*" Binding="{Binding FromLocation, UpdateSourceTrigger=PropertyChanged}" Header="مبدا" />
-                    <DataGridTextColumn Width="*" Binding="{Binding ToLocation, UpdateSourceTrigger=PropertyChanged}" Header="مقصد" />
-                    <DataGridTextColumn Width="*" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Header="قیمت" />
+                    <DataGridTextColumn Width="auto" Binding="{Binding Id}" Header="شناسه" />
+                    <!--<DataGridTextColumn Width="auto" Binding="{Binding DriveName}" Header="نام راننده" />-->
+                    <DataGridTextColumn Width="auto" Binding="{Binding Name}" Header="نام دانش آموز" />
+                    <DataGridTextColumn Width="auto" Binding="{Binding Adreess}" Header="آدرس دانش آموز" />
+                    <DataGridTextColumn Width="auto" SortDirection="Ascending" Binding="{Binding date}" Header="تاریخ سرویس" />
+                    <DataGridTextColumn Width="auto" Binding="{Binding Price}" Header="مبلغ قابل پرداخت" />
+                    <DataGridTextColumn Width="auto" Binding="{Binding PricePay}" Header="مبلغ پرداخت شده" />
+                    <DataGridTextColumn Width="auto" Binding="{Binding Phone}" Header="تلفن دانش آموز" />
+                    <DataGridTextColumn Width="auto" Binding="{Binding SchoolName}" Header="نام مدرسه" />
+                    <DataGridTextColumn Width="auto" Binding="{Binding SchoolAdreess}" Header="آدرس مدرسه" />
+                    <DataGridTextColumn Width="auto" Binding="{Binding SchoolPhone}" Header="تلفن مدرسه" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
@@ -75,12 +78,46 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <TextBlock x:Name="PopupTitle" Grid.Row="0" Padding="20" VerticalAlignment="Center" Background="#FFD9D9D9" FontSize="20">
-                        عنوان صفحه
+                        ایجاد سرویس
                     </TextBlock>
                     <Grid Grid.Row="1">
-                        <Frame x:Name="frm"  JournalOwnership="OwnsJournal"
-            NavigationUIVisibility="Hidden" />
-
+                        <Frame x:Name="frm" JournalOwnership="OwnsJournal" NavigationUIVisibility="Hidden" />
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid x:Name="DeleteItem" Background="#AA6F6F6F" Visibility="Collapsed">
+            <Border Width="600" Height="300" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFE0E0E0" BorderBrush="Gray" BorderThickness="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Padding="20" VerticalAlignment="Center" Background="#FFD9D9D9" FontSize="20">
+                       حذف سرویس های انخاب شده
+                    </TextBlock>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition MaxHeight="50" />
+                        </Grid.RowDefinitions>
+                        <TextBlock FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" TextAlignment="Center" Grid.Row="0">
+                            آیا از حذف  موارد انتخاب شده اطمینان دارید؟
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                            <Button Click="Button_Click" Margin="5" Padding="5" FontSize="15">
+                                <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal">
+                                    <fa:ImageAwesome Width="20" Foreground="Green" Margin="2" Icon="ArrowLeft" />
+                                    <TextBlock Margin="2">بیخیال</TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Click="CreateDlt_Click" x:Name="CreateDlt" Margin="5" Padding="5" FontSize="15">
+                                <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal">
+                                    <fa:ImageAwesome Width="20" Foreground="Red" Margin="2" Icon="Trash" />
+                                    <TextBlock Margin="2">حذف</TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </Border>

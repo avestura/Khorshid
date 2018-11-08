@@ -28,5 +28,6 @@ namespace Khorshid.Models
         public int PricePay { get; set; }
 
         public string date { get; set; }
+
     }
 }

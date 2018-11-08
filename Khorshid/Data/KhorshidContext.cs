@@ -28,8 +28,8 @@ namespace Khorshid.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer<KhorshidContext>(null);
-            base.OnModelCreating(modelBuilder);
+            //Database.SetInitializer<KhorshidContext>(null);
+            //base.OnModelCreating(modelBuilder);
         }
     }
 }

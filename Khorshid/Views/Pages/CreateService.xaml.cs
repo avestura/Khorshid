@@ -15,19 +15,16 @@ namespace Khorshid.Views.Pages
     /// </summary>
     public partial class CreateService : Page
     {
-        public CreateService()
+        string _driver;
+        public CreateService(string Driver)
         {
             InitializeComponent();
-            KhorshidContext.Drivers.Load();
-            Drivers = KhorshidContext.Drivers.Local;
+            _driver = Driver;
 
         }
 
         private readonly KhorshidContext KhorshidContext = new KhorshidContext();
-        public ObservableCollection<Driver> Drivers
-        {
-            get;
-        }
+    
         public ObservableCollection<Service> Services
         {
             get;
@@ -37,11 +34,7 @@ namespace Khorshid.Views.Pages
         {
             PersianCalendar p = new PersianCalendar();
 
-            var x = Drivers;
-            foreach (var item in x)
-                CMB_DRIVER.Items.Add(item.Name);
 
-            CMB_DRIVER.SelectedIndex = 0;
             var m = "فروردین اردیبهشت خرداد تیر مرداد شهریور مهر آبان آذر دی بهمن اسفند".Split(' ');
             int counter = 0;
             for (int i = 1397; i < 1440; i++)
@@ -69,7 +62,7 @@ namespace Khorshid.Views.Pages
 
         private void CANCEL_Button_Click(object sender, RoutedEventArgs e)
         {
-            App.Navigator.Navigate(new MyService());
+            App.Navigator.Navigate(new MyService(_driver));
         }
 
         private void CreateBtn_Click(object sender, RoutedEventArgs e)
@@ -83,7 +76,7 @@ namespace Khorshid.Views.Pages
                 {
                     var service = new Service
                     {
-                        DriveName = CMB_DRIVER.Text,
+                        DriveName = _driver,
                         Name = TXT_STU_NAME.Text,
                         Phone = TXT_STU_PH.Text,
                         Adreess = TXT_STU_ADD.Text,
@@ -100,9 +93,11 @@ namespace Khorshid.Views.Pages
                     context.SaveChanges();
 
                 }
+                App.Navigator.Navigate(new MyService(_driver));
 
 
             }
+
         }
         private string[] GetMArray(string date,int forward)
         {

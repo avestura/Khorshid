@@ -152,6 +152,10 @@
     <Compile Include="Migrations\201808281316344_WorkPageSecondMigration.Designer.cs">
       <DependentUpon>201808281316344_WorkPageSecondMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811021018262_Give_it_a_name.cs" />
+    <Compile Include="Migrations\201811021018262_Give_it_a_name.Designer.cs">
+      <DependentUpon>201811021018262_Give_it_a_name.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Driver.cs" />
@@ -179,6 +183,9 @@
     </Compile>
     <Compile Include="Views\Pages\Customers.xaml.cs">
       <DependentUpon>Customers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\DriverForService.xaml.cs">
+      <DependentUpon>DriverForService.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\DriverPage.xaml.cs">
       <DependentUpon>DriverPage.xaml</DependentUpon>
@@ -266,6 +273,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\Customers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\DriverForService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -367,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808281316344_WorkPageSecondMigration.resx">
       <DependentUpon>201808281316344_WorkPageSecondMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811021018262_Give_it_a_name.resx">
+      <DependentUpon>201811021018262_Give_it_a_name.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

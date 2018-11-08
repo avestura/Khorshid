@@ -15,7 +15,7 @@
             <ColumnDefinition MaxWidth="160" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="64" />
+            <RowDefinition MaxHeight="15" />
             <RowDefinition MaxHeight="64" />
             <RowDefinition MaxHeight="64" />
             <RowDefinition MaxHeight="64" />
@@ -28,9 +28,6 @@
             <RowDefinition MaxHeight="64" />
 
         </Grid.RowDefinitions>
-
-        <ComboBox FontSize="15"  Grid.Column="1" Grid.Row="0" x:Name="CMB_DRIVER" HorizontalAlignment="Stretch" Margin="5" VerticalAlignment="Stretch" />
-        <Label FontSize="15" Content="نام راننده:"  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" FlowDirection="RightToLeft" />
 
         <ComboBox FontSize="15"  Grid.Column="1" Grid.Row="1" x:Name="CMB_START" HorizontalAlignment="Stretch" Margin="5" VerticalAlignment="Stretch" />
         <Label FontSize="15" Grid.Column="2" Grid.Row="1" Content="تاریخ شروع:" HorizontalAlignment="Left"  Margin="5" VerticalAlignment="Top" FlowDirection="RightToLeft" />

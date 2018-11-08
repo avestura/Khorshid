@@ -129,5 +129,39 @@ namespace Khorshid.Engines
             collection.Clear();
             searchResult.ToList().ForEach(item => collection.Add(item));
         }
+        public static void ApplySearchOnCollection(string term, ObservableCollection<Service> collection)
+        {
+            List<Service> services = new List<Service>();
+            foreach (var item in collection)
+            {
+                if (item.Adreess.Contains(term))
+                    goto findline;
+                if (item.date.Contains(term))
+                    goto findline;
+                if (item.Id.ToString().Contains(term))
+                    goto findline;
+                if (item.Name.Contains(term))
+                    goto findline;
+                if (item.Phone.Contains(term))
+                    goto findline;
+                if (item.PricePay.ToString().Contains(term))
+                    goto findline;
+                if (item.SchoolAdreess.Contains(term))
+                    goto findline;
+                if (item.SchoolName.Contains(term))
+                    goto findline;
+                if (item.SchoolPhone.Contains(term))
+                    goto findline;
+                else
+                    continue;
+                findline:
+                services.Add(item);
+            }
+
+            collection.Clear();
+            services.ForEach (item => collection.Add(item)) ;
+
+        }
+
     }
 }
