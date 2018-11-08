@@ -26,7 +26,7 @@
                             </StackPanel>
                         </Grid>
                     </Button>
-                    <Button x:Name="EditItem_Button" Margin="10,0,0,0" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FFE5E8C0" BorderBrush="#FF93AD1F" BorderThickness="0,0,0,5">
+                    <Button x:Name="EditItem_Button" Margin="10,0,0,0" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#FFE5E8C0" BorderBrush="#FF93AD1F" BorderThickness="0,0,0,5" Click="EditItem_Button_Click">
                         <StackPanel Orientation="Horizontal">
                             <fa:ImageAwesome Width="15" Margin="5,10" Foreground="#FFA7AD1F" Icon="Money" />
                             <TextBlock Margin="5,0,10,0" VerticalAlignment="Center" FontSize="15" Foreground="#FF718000">
@@ -94,7 +94,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Padding="20" VerticalAlignment="Center" Background="#FFD9D9D9" FontSize="20">
-                       حذف سرویس های انخاب شده
+                       حذف سرویس های انتخاب شده
                     </TextBlock>
                     <Grid Grid.Row="1">
                         <Grid.RowDefinitions>
@@ -115,6 +115,59 @@
                                 <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal">
                                     <fa:ImageAwesome Width="20" Foreground="Red" Margin="2" Icon="Trash" />
                                     <TextBlock Margin="2">حذف</TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid x:Name="FinalPayment" Background="#AA6F6F6F" Visibility="Collapsed">
+            <Border Width="600" Height="300" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFE0E0E0" BorderBrush="Gray" BorderThickness="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Padding="20" VerticalAlignment="Center" Background="#FFD9D9D9" FontSize="20">
+                       تصویه حساب سرویس انتخاب شده
+                    </TextBlock>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition MaxHeight="50" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" FlowDirection="RightToLeft" x:Name="lbl_Serv_name" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center">نام سرویس:</TextBlock>
+                                <TextBlock Grid.Row="1" FlowDirection="RightToLeft" x:Name="lbl_Serv_mnt" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center">ماه سرویس:</TextBlock>
+                                <TextBlock Grid.Row="2" FlowDirection="RightToLeft" x:Name="lbl_Money" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" >this is test</TextBlock>
+                                <Grid Grid.Row="3" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Margin="5" Grid.Column="0"  FlowDirection="RightToLeft" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center" >مبلغ پرداخت شده</TextBlock>
+                                    <local:TextBoxEx x:Name="txt_main" MaxLength="10" Margin="5" Padding="2" Grid.Column="1"  FlowDirection="RightToLeft" FontSize="18" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                                </Grid>
+                           
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1">
+                            <Button x:Name="BTN_CAN" Click="BTN_CAN_Click" Margin="5" Padding="5" FontSize="15">
+                                <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal">
+                                    <fa:ImageAwesome Width="20" Foreground="Green" Margin="2" Icon="ArrowLeft" />
+                                    <TextBlock Margin="2">بیخیال</TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button Click="BTN_PayMent_Click"  x:Name="BTN_PayMent" Margin="5" Padding="5" FontSize="15">
+                                <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal">
+                                    <fa:ImageAwesome Width="20" Foreground="DarkOrange" Margin="2" Icon="Diamond" />
+                                    <TextBlock Margin="2">تایید</TextBlock>
                                 </StackPanel>
                             </Button>
                         </StackPanel>

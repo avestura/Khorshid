@@ -52,7 +52,6 @@ namespace Khorshid.Views.Pages
         {
             CreateService service = new CreateService(driver);
             frm.Navigate(service);
-           //frm.Source = new Uri("CreateService.xaml?Driver=\"" + driver + "\"", UriKind.Relative);
            
            
         }
@@ -105,6 +104,46 @@ namespace Khorshid.Views.Pages
                 return;
             SearchEngine.ApplySearchOnCollection(ctr.Text,Service);
                 
+        }
+
+        private void BTN_PayMent_Click(object sender, RoutedEventArgs e)
+        {
+            var res = (Service)DataGrid_Main.SelectedItem;
+
+            if (KhorshidContext.Services.FirstOrDefault(d => d.Id == res.Id) is Service service)
+            {
+                service.PricePay =int.Parse( txt_main.Text.Replace(",",""));
+
+                KhorshidContext.SaveChanges();
+            }
+            FinalPayment.HideUsingLinearAnimation(milliSeconds: 250);
+
+            App.Navigator.Navigate(new MyService(driver));
+
+        }
+
+        private void BTN_CAN_Click(object sender, RoutedEventArgs e)
+        {
+            FinalPayment.HideUsingLinearAnimation(milliSeconds: 250);
+            App.Navigator.Navigate(new MyService(driver));
+
+        }
+
+        private void EditItem_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataGrid_Main.SelectedItems.Count > 0)
+            {
+                var res = (Service)DataGrid_Main.SelectedItem;
+                lbl_Serv_mnt.Text = "ماه سرویس:" + res.date;
+                lbl_Serv_name.Text = "نام دانش آموز:" + res.Name;
+                lbl_Money.Text = "مبلغ قرارداد:" + res.Price;
+
+                FinalPayment.ShowUsingLinearAnimation(milliSeconds: 250);
+            }
+            else
+            {
+                MessageBox.Show("هیچ سرویسی انخاب نشده است");
+            }
         }
     }
 }
