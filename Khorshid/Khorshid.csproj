@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Khorshid</RootNamespace>
     <AssemblyName>Khorshid</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -30,6 +30,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -40,6 +41,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -150,10 +152,15 @@
     <Compile Include="Migrations\201808281316344_WorkPageSecondMigration.Designer.cs">
       <DependentUpon>201808281316344_WorkPageSecondMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811021018262_Give_it_a_name.cs" />
+    <Compile Include="Migrations\201811021018262_Give_it_a_name.Designer.cs">
+      <DependentUpon>201811021018262_Give_it_a_name.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Driver.cs" />
     <Compile Include="Models\DriverWork.cs" />
+    <Compile Include="Models\Service.cs" />
     <Compile Include="Models\WorkPage.cs" />
     <Compile Include="Models\TownData.cs" />
     <Compile Include="ViewModels\DriverDetailsViewModel.cs" />
@@ -171,8 +178,14 @@
     <Compile Include="Views\Pages\AddDriverPage.xaml.cs">
       <DependentUpon>AddDriverPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\CreateService.xaml.cs">
+      <DependentUpon>CreateService.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\Customers.xaml.cs">
       <DependentUpon>Customers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\DriverForService.xaml.cs">
+      <DependentUpon>DriverForService.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\DriverPage.xaml.cs">
       <DependentUpon>DriverPage.xaml</DependentUpon>
@@ -185,6 +198,9 @@
     </Compile>
     <Compile Include="Views\Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\MyService.xaml.cs">
+      <DependentUpon>MyService.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\SearchTownPage.xaml.cs">
       <DependentUpon>SearchTownPage.xaml</DependentUpon>
@@ -252,7 +268,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\CreateService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\Customers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\DriverForService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -269,6 +293,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\MyService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -350,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808281316344_WorkPageSecondMigration.resx">
       <DependentUpon>201808281316344_WorkPageSecondMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811021018262_Give_it_a_name.resx">
+      <DependentUpon>201811021018262_Give_it_a_name.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -39,5 +39,12 @@ namespace Khorshid.Views.Pages
         {
             App.Navigator.Navigate(new Customers());
         }
+
+        private void SchoolService_Click(object sender, RoutedEventArgs e)
+        {
+            App.Navigator.Navigate(new DriverForService());
+        }
+
+       
     }
 }

@@ -24,8 +24,12 @@ namespace Khorshid.Data
 
         public DbSet<Customer> Customers { get; set; }
 
+        public DbSet<Service> Services { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //Database.SetInitializer<KhorshidContext>(null);
+            //base.OnModelCreating(modelBuilder);
         }
     }
 }
